@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { config } from './common/config';
-import { AppUpdate } from './telegram.update';
+import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
   imports: [
@@ -10,7 +10,7 @@ import { AppUpdate } from './telegram.update';
     TelegrafModule.forRoot({
       token: config.telegramToken(),
     }),
+    TelegramModule,
   ],
-  providers: [AppUpdate],
 })
 export class AppModule {}
