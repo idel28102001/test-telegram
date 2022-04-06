@@ -1,5 +1,4 @@
 import { Action, Start, Update } from 'nestjs-telegraf';
-import { AppService } from 'src/app.service';
 import { Context } from 'vm';
 import * as fs from 'fs';
 
@@ -7,16 +6,13 @@ export const clients = [];
 
 @Update()
 export class AppUpdate {
-  constructor(private readonly appService: AppService) {}
-  private currentUser = null;
-
   @Start()
   async startCommand(ctx: Context) {
     clients.push(ctx.message.chat.id);
     await ctx.replyWithPhoto({ source: 'src/assert/nice.jpeg' });
     await ctx.replyWithAudio({ source: 'src/assert/nice.mp3' });
     const some = fs.readFileSync('src/assert/nice.txt', 'utf-8');
-    const text = await ctx.reply(some, {
+    await ctx.reply(some, {
       reply_markup: {
         inline_keyboard: [
           [{ text: 'Круто!', callback_data: 'create' }],
