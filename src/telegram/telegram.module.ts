@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppUpdate } from './telegram.update';
+import { AppUpdate } from './update/telegram/telegram.update';
 
 @Module({
   providers: [AppUpdate],
