@@ -1,6 +1,7 @@
 import { Action, Start, Update } from 'nestjs-telegraf';
 import { AppService } from 'src/app.service';
 import { Context } from 'vm';
+import * as fs from 'fs';
 
 export const clients = [];
 
@@ -12,12 +13,15 @@ export class AppUpdate {
   @Start()
   async startCommand(ctx: Context) {
     clients.push(ctx.message.chat.id);
-    await ctx.reply('Что бы вы хотели сделать?', {
+    await ctx.replyWithPhoto({ source: 'src/assert/nice.jpeg' });
+    await ctx.replyWithAudio({ source: 'src/assert/nice.mp3' });
+    const some = fs.readFileSync('src/assert/nice.txt', 'utf-8');
+    const text = await ctx.reply(some, {
       reply_markup: {
         inline_keyboard: [
-          [{ text: 'Создать новость', callback_data: 'create' }],
-          [{ text: 'Изменить новость', callback_data: 'change' }],
-          [{ text: 'Найти новость', callback_data: 'find' }],
+          [{ text: 'Круто!', callback_data: 'create' }],
+          [{ text: 'Давай ещё!', callback_data: 'change' }],
+          [{ text: 'Во дела!)', callback_data: 'find' }],
         ],
       },
     });
@@ -25,7 +29,7 @@ export class AppUpdate {
 
   @Action('create')
   async createPost(ctx: any) {
-    ctx.reply('Введите ваш заголовок', {
+    ctx.reply('А то!', {
       reply_markup: {
         callback_data: 'ss',
       },
@@ -33,7 +37,7 @@ export class AppUpdate {
   }
   @Action('change')
   async changePost(ctx: any) {
-    ctx.reply('Какой ваш пост?', {
+    ctx.reply('Я устал', {
       reply_markup: {
         callback_data: 'ss',
       },
@@ -42,7 +46,7 @@ export class AppUpdate {
 
   @Action('find')
   async findPost(ctx: any) {
-    ctx.reply('Какой ваш пост?', {
+    ctx.reply('Ага!', {
       reply_markup: {
         callback_data: 'ss',
       },
