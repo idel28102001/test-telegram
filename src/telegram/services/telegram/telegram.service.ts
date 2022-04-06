@@ -3,7 +3,7 @@ import { config } from 'src/common/config';
 import { TelegramClient } from 'telegram';
 import { StringSession } from 'telegram/sessions';
 import { Telegraf } from 'telegraf';
-const app = new Telegraf('5284035313:AAE15tnvTYt5FAquffIzhWYVAWyTEb3WB_Y');
+const app = new Telegraf(config.telegramToken());
 import { clients } from 'src/telegram.update';
 
 @Injectable()

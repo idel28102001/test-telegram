@@ -12,6 +12,10 @@ class Config {
     return this.config.get(propertyPath, defaultValue);
   }
 
+  public telegramToken(): string {
+    return this.get('TELEGRAM_TOKEN');
+  }
+
   public getDatabaseOptions(): TypeOrmModuleOptions {
     return {
       type: this.get('DB_TYPE'),

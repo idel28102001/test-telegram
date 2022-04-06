@@ -13,7 +13,7 @@ import { UsersModule } from './users/users.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TelegrafModule.forRoot({
-      token: '5284035313:AAE15tnvTYt5FAquffIzhWYVAWyTEb3WB_Y',
+      token: config.telegramToken(),
     }),
     TypeOrmModule.forRootAsync({
       useFactory: () => config.getDatabaseOptions(),
